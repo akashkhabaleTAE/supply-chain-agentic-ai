@@ -1,0 +1,80 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Supply Chain AI dashboard mockup">
+  <rect width="1440" height="900" fill="#F4F6F3"/>
+  <rect x="0" y="0" width="248" height="900" fill="#FBFCFA"/>
+  <rect x="247" y="0" width="1" height="900" fill="#DCE3DC"/>
+  <rect x="26" y="28" width="44" height="44" rx="8" fill="#0E766E"/>
+  <path d="M49 38l11 21H38L49 38z" fill="white"/>
+  <text x="84" y="45" fill="#17211F" font-family="Segoe UI, Arial" font-size="17" font-weight="700">Supply Chain AI</text>
+  <text x="84" y="66" fill="#66716C" font-family="Segoe UI, Arial" font-size="12">Autonomous risk ops</text>
+  <rect x="24" y="112" width="200" height="42" rx="8" fill="#E3F2EF"/>
+  <text x="64" y="139" fill="#0E766E" font-family="Segoe UI, Arial" font-size="14" font-weight="700">Overview</text>
+  <text x="64" y="191" fill="#66716C" font-family="Segoe UI, Arial" font-size="14" font-weight="700">Agent Workflow</text>
+  <text x="64" y="239" fill="#66716C" font-family="Segoe UI, Arial" font-size="14" font-weight="700">Suppliers</text>
+  <text x="64" y="287" fill="#66716C" font-family="Segoe UI, Arial" font-size="14" font-weight="700">Events</text>
+
+  <text x="288" y="45" fill="#0E766E" font-family="Segoe UI, Arial" font-size="12" font-weight="800">SUPPLY CHAIN 1</text>
+  <text x="288" y="84" fill="#17211F" font-family="Segoe UI, Arial" font-size="38" font-weight="800">Risk Control Tower</text>
+  <rect x="1296" y="34" width="42" height="42" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+  <rect x="1350" y="34" width="42" height="42" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+
+  <g>
+    <rect x="288" y="124" width="258" height="132" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+    <rect x="310" y="146" width="38" height="38" rx="8" fill="#FFF0DF"/>
+    <text x="310" y="211" fill="#66716C" font-family="Segoe UI, Arial" font-size="13" font-weight="800">Max Exposure</text>
+    <text x="310" y="240" fill="#17211F" font-family="Segoe UI, Arial" font-size="30" font-weight="800">78.5</text>
+  </g>
+  <g>
+    <rect x="564" y="124" width="258" height="132" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+    <rect x="586" y="146" width="38" height="38" rx="8" fill="#FFF3D7"/>
+    <text x="586" y="211" fill="#66716C" font-family="Segoe UI, Arial" font-size="13" font-weight="800">Open Events</text>
+    <text x="586" y="240" fill="#17211F" font-family="Segoe UI, Arial" font-size="30" font-weight="800">2</text>
+  </g>
+  <g>
+    <rect x="840" y="124" width="258" height="132" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+    <rect x="862" y="146" width="38" height="38" rx="8" fill="#FFF0DF"/>
+    <text x="862" y="211" fill="#66716C" font-family="Segoe UI, Arial" font-size="13" font-weight="800">High Risk Suppliers</text>
+    <text x="862" y="240" fill="#17211F" font-family="Segoe UI, Arial" font-size="30" font-weight="800">2</text>
+  </g>
+  <g>
+    <rect x="1116" y="124" width="258" height="132" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+    <rect x="1138" y="146" width="38" height="38" rx="8" fill="#E3F2EF"/>
+    <text x="1138" y="211" fill="#66716C" font-family="Segoe UI, Arial" font-size="13" font-weight="800">Generated</text>
+    <text x="1138" y="240" fill="#17211F" font-family="Segoe UI, Arial" font-size="24" font-weight="800">22 Apr, 13:05</text>
+  </g>
+
+  <rect x="288" y="276" width="732" height="360" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+  <text x="312" y="314" fill="#0E766E" font-family="Segoe UI, Arial" font-size="12" font-weight="800">EXPOSURE</text>
+  <text x="312" y="342" fill="#17211F" font-family="Segoe UI, Arial" font-size="19" font-weight="800">Supplier Risk Heatmap</text>
+  <rect x="354" y="404" width="92" height="174" rx="6" fill="#D97008"/>
+  <rect x="496" y="404" width="92" height="174" rx="6" fill="#D97008"/>
+  <rect x="638" y="472" width="92" height="106" rx="6" fill="#B7791F"/>
+  <rect x="780" y="520" width="92" height="58" rx="6" fill="#0E766E"/>
+  <line x1="330" y1="578" x2="930" y2="578" stroke="#DCE3DC"/>
+  <line x1="330" y1="506" x2="930" y2="506" stroke="#EEF1EE"/>
+  <line x1="330" y1="434" x2="930" y2="434" stroke="#EEF1EE"/>
+
+  <rect x="1038" y="276" width="336" height="360" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+  <text x="1062" y="314" fill="#0E766E" font-family="Segoe UI, Arial" font-size="12" font-weight="800">SEVERITY</text>
+  <text x="1062" y="342" fill="#17211F" font-family="Segoe UI, Arial" font-size="19" font-weight="800">Event Mix</text>
+  <circle cx="1206" cy="470" r="78" stroke="#D97008" stroke-width="34"/>
+  <path d="M1206 392a78 78 0 0 1 74 103" stroke="#B7791F" stroke-width="34"/>
+  <circle cx="1206" cy="470" r="42" fill="#FFFFFF"/>
+  <text x="1179" y="478" fill="#17211F" font-family="Segoe UI, Arial" font-size="22" font-weight="800">HIGH</text>
+
+  <rect x="288" y="656" width="528" height="190" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+  <text x="312" y="694" fill="#0E766E" font-family="Segoe UI, Arial" font-size="12" font-weight="800">AGENTIC WORKFLOW</text>
+  <text x="312" y="722" fill="#17211F" font-family="Segoe UI, Arial" font-size="19" font-weight="800">Disruption Simulation</text>
+  <rect x="312" y="748" width="480" height="58" rx="8" fill="#F9FAF8" stroke="#DCE3DC"/>
+  <rect x="312" y="818" width="126" height="44" rx="8" fill="#0E766E"/>
+  <text x="344" y="846" fill="#FFFFFF" font-family="Segoe UI, Arial" font-size="14" font-weight="800">Run agents</text>
+
+  <rect x="836" y="656" width="538" height="190" rx="8" fill="#FFFFFF" stroke="#DCE3DC"/>
+  <text x="860" y="694" fill="#0E766E" font-family="Segoe UI, Arial" font-size="12" font-weight="800">LAST RUN</text>
+  <text x="860" y="722" fill="#17211F" font-family="Segoe UI, Arial" font-size="19" font-weight="800">Agent Trace</text>
+  <circle cx="874" cy="759" r="5" fill="#0E766E"/>
+  <circle cx="874" cy="799" r="5" fill="#0E766E"/>
+  <circle cx="874" cy="839" r="5" fill="#0E766E"/>
+  <text x="894" y="765" fill="#17211F" font-family="Segoe UI, Arial" font-size="14" font-weight="700">disruption-detector completed</text>
+  <text x="894" y="805" fill="#17211F" font-family="Segoe UI, Arial" font-size="14" font-weight="700">supplier-mapper completed</text>
+  <text x="894" y="845" fill="#17211F" font-family="Segoe UI, Arial" font-size="14" font-weight="700">risk-analyzer completed</text>
+</svg>

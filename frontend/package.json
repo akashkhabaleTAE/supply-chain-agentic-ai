@@ -1,0 +1,21 @@
+{
+  "name": "supply-chain-agentic-ai-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "chart.js": "latest",
+    "lucide-react": "latest",
+    "react": "18.3.1",
+    "react-chartjs-2": "latest",
+    "react-dom": "18.3.1",
+    "vite": "latest"
+  },
+  "devDependencies": {}
+}

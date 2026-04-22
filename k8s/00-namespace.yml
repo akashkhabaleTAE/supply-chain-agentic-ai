@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: supply-chain-ai
+  labels:
+    app.kubernetes.io/name: supply-chain-agentic-ai
+    app.kubernetes.io/part-of: supply-chain-agentic-ai

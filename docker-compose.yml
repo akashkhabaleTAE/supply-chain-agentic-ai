@@ -1,0 +1,219 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: supplychain-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: supplychain
+      MYSQL_DATABASE: supplychain
+    ports:
+      - "${MYSQL_HOST_PORT:-3307}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -psupplychain --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - supplychain-net
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: supplychain-redis
+    ports:
+      - "${REDIS_HOST_PORT:-6380}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - supplychain-net
+
+  data-service:
+    build:
+      context: .
+      dockerfile: data-service/Dockerfile
+      args:
+        SERVICE_NAME: data-service
+    image: supply-chain-agentic-ai/data-service:0.1.0
+    container_name: supplychain-data-service
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/supplychain?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: supplychain
+      SPRING_DATASOURCE_DRIVER: com.mysql.cj.jdbc.Driver
+      JAVA_OPTS: -XX:MaxRAMPercentage=75.0
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8082/actuator/health | grep UP"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 45s
+    networks:
+      - supplychain-net
+
+  optimization-service:
+    build:
+      context: .
+      dockerfile: optimization-service/Dockerfile
+      args:
+        SERVICE_NAME: optimization-service
+    image: supply-chain-agentic-ai/optimization-service:0.1.0
+    container_name: supplychain-optimization-service
+    environment:
+      JAVA_OPTS: -XX:MaxRAMPercentage=75.0
+    ports:
+      - "8084:8084"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8084/actuator/health | grep UP"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - supplychain-net
+
+  agent-orchestrator:
+    build:
+      context: .
+      dockerfile: agent-orchestrator/Dockerfile
+      args:
+        SERVICE_NAME: agent-orchestrator
+    image: supply-chain-agentic-ai/agent-orchestrator:0.1.0
+    container_name: supplychain-agent-orchestrator
+    environment:
+      DATA_SERVICE_URL: http://data-service:8082
+      OPTIMIZATION_SERVICE_URL: http://optimization-service:8084
+      AI_PROVIDER: local
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      JAVA_OPTS: -XX:MaxRAMPercentage=75.0
+    ports:
+      - "8081:8081"
+    depends_on:
+      data-service:
+        condition: service_healthy
+      optimization-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8081/actuator/health | grep UP"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - supplychain-net
+
+  monitoring-service:
+    build:
+      context: .
+      dockerfile: monitoring-service/Dockerfile
+      args:
+        SERVICE_NAME: monitoring-service
+    image: supply-chain-agentic-ai/monitoring-service:0.1.0
+    container_name: supplychain-monitoring-service
+    environment:
+      AGENT_ORCHESTRATOR_URL: http://agent-orchestrator:8081
+      JAVA_OPTS: -XX:MaxRAMPercentage=75.0
+    ports:
+      - "8083:8083"
+    depends_on:
+      agent-orchestrator:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8083/actuator/health | grep UP"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - supplychain-net
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway-service/Dockerfile
+      args:
+        SERVICE_NAME: gateway-service
+    image: supply-chain-agentic-ai/gateway-service:0.1.0
+    container_name: supplychain-gateway
+    environment:
+      AGENT_ORCHESTRATOR_URL: http://agent-orchestrator:8081
+      DATA_SERVICE_URL: http://data-service:8082
+      MONITORING_SERVICE_URL: http://monitoring-service:8083
+      OPTIMIZATION_SERVICE_URL: http://optimization-service:8084
+      JWT_SECRET: ${JWT_SECRET:-supplychain2026-supplychain2026-supplychain2026}
+      GATEWAY_DEMO_USERNAME: ${GATEWAY_DEMO_USERNAME:-akash}
+      GATEWAY_DEMO_PASSWORD: ${GATEWAY_DEMO_PASSWORD:-supplychain2026}
+      JAVA_OPTS: -XX:MaxRAMPercentage=75.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      agent-orchestrator:
+        condition: service_healthy
+      data-service:
+        condition: service_healthy
+      monitoring-service:
+        condition: service_healthy
+      optimization-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health | grep UP"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - supplychain-net
+
+  frontend:
+    build:
+      context: ./frontend
+    image: supply-chain-agentic-ai/frontend:0.1.0
+    container_name: supplychain-frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://localhost:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - supplychain-net
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    container_name: supplychain-prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    networks:
+      - supplychain-net
+
+networks:
+  supplychain-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
