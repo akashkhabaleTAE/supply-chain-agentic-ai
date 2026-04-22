@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
@@ -17,6 +17,7 @@ spring:
             allowedOrigins:
               - "http://localhost:3000"
               - "http://127.0.0.1:3000"
+              - "https://supply-chain-agentic-ai-dashboard.onrender.com"
             allowedMethods:
               - GET
               - POST

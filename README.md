@@ -226,6 +226,7 @@ kubectl delete namespace supply-chain-ai
 - [Architecture](docs/ARCHITECTURE.md)
 - [Runbook](docs/RUNBOOK.md)
 - [API examples](docs/API_EXAMPLES.md)
+- [Render deployment](docs/RENDER_DEPLOYMENT.md)
 - [Portfolio notes](docs/PORTFOLIO_NOTES.md)
 - [File tree](docs/FILE_TREE.md)
 

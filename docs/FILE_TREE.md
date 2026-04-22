@@ -5,6 +5,7 @@ supply-chain-agentic-ai/
 ├── README.md
 ├── pom.xml
 ├── docker-compose.yml
+├── render.yaml
 ├── .env.example
 ├── .gitignore
 ├── .dockerignore
@@ -13,6 +14,7 @@ supply-chain-agentic-ai/
 │   ├── API_EXAMPLES.md
 │   ├── FILE_TREE.md
 │   ├── PORTFOLIO_NOTES.md
+│   ├── RENDER_DEPLOYMENT.md
 │   ├── RUNBOOK.md
 │   └── assets/
 │       └── dashboard-mockup.svg
